@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abraham Trueba — computational biology, drug-target discovery</title>
+<meta name="description" content="Open-source computational pipelines that test whether a drug target is actually real. Pre-registered hypotheses, SHA-locked verdicts, null results published.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f1f4f3;
+    --card:#ffffff;
+    --ink:#12211d;
+    --ink-soft:#42514c;
+    --muted:#72817c;
+    --line:#dbe1de;
+    --card-line:#e4e9e6;
+    --accent:#0d7268;
+    --accent-soft:rgba(13,114,104,.10);
+    --flag:#b1471d;
+    --flag-soft:rgba(177,71,29,.10);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;}
+
+  .wrap{
+    display:grid;
+    grid-template-columns:288px 1fr;
+    gap:72px;
+    max-width:1080px;
+    margin:0 auto;
+    padding:72px 40px 96px;
+  }
+
+  .rail{position:sticky;top:56px;align-self:start;}
+  .avatar{
+    width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--ink);color:var(--paper);
+    font-size:15px;font-weight:500;letter-spacing:.06em;
+    margin-bottom:22px;
+  }
+  .rail h1{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:700;font-size:1.5rem;line-height:1.15;
+    margin:0 0 10px;letter-spacing:-.01em;
+  }
+  .tag{margin:0 0 16px;color:var(--ink-soft);font-size:.94rem;}
+  .edu{margin:0 0 26px;color:var(--muted);font-size:.82rem;line-height:1.5;}
+  .links{display:flex;flex-direction:column;gap:11px;margin-bottom:28px;}
+  .links a{
+    display:flex;align-items:baseline;gap:10px;
+    text-decoration:none;font-size:.9rem;color:var(--ink-soft);
+    width:fit-content;transition:color .15s ease;
+  }
+  .links a:hover{color:var(--accent);}
+  .links .k{
+    font-size:.72rem;color:var(--muted);
+    border:1px solid var(--line);border-radius:4px;
+    padding:1px 5px;min-width:34px;text-align:center;
+  }
+  .links a:hover .k{border-color:var(--accent);color:var(--accent);}
+  .seal{
+    font-size:.72rem;color:var(--muted);line-height:1.7;
+    padding-top:20px;border-top:1px solid var(--line);
+  }
+
+  main{min-width:0;}
+  .kicker{
+    font-size:.74rem;color:var(--accent);letter-spacing:.04em;
+    margin:0 0 12px;
+  }
+  section{margin-bottom:60px;}
+  section:last-of-type{margin-bottom:48px;}
+
+  .hero .display{
+    font-family:"Space Grotesk",sans-serif;font-weight:700;
+    font-size:clamp(2.1rem,5.2vw,3.05rem);line-height:1.04;
+    letter-spacing:-.02em;margin:0 0 22px;
+  }
+  .lede{font-size:1.08rem;color:var(--ink-soft);margin:0 0 22px;max-width:56ch;}
+  .sig{
+    font-size:.78rem;color:var(--muted);line-height:1.7;
+    padding-left:16px;border-left:2px solid var(--accent);
+  }
+
+  .sec{
+    font-family:"Space Grotesk",sans-serif;font-weight:600;
+    font-size:1.16rem;margin:0 0 22px;letter-spacing:-.01em;
+  }
+
+  .cards{display:flex;flex-direction:column;gap:14px;}
+  .card{
+    display:block;text-decoration:none;
+    background:var(--card);
+    border:1px solid var(--card-line);border-radius:10px;
+    padding:20px 22px;
+    border-left:3px solid var(--card-line);
+    transition:border-color .16s ease,transform .16s ease,box-shadow .16s ease;
+  }
+  .card:hover{
+    border-left-color:var(--accent);
+    transform:translateY(-2px);
+    box-shadow:0 10px 26px -18px rgba(13,114,104,.5);
+  }
+  .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .card-top{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:14px;margin-bottom:10px;flex-wrap:wrap;
+  }
+  .repo{font-size:.82rem;color:var(--ink);font-weight:500;}
+  .chip{
+    font-size:.72rem;color:var(--accent);
+    background:var(--accent-soft);
+    padding:3px 9px;border-radius:20px;white-space:nowrap;
+  }
+  .card-body{margin:0;font-size:.95rem;color:var(--ink-soft);}
+  .flag{
+    display:inline-block;margin-top:12px;
+    font-size:.72rem;color:var(--flag);
+    background:var(--flag-soft);
+    padding:3px 9px;border-radius:20px;
+  }
+
+  .tools{font-size:.95rem;color:var(--ink-soft);margin:0;max-width:60ch;}
+  .tools a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft);}
+  .tools a:hover{border-bottom-color:var(--accent);}
+
+  .ledger{list-style:none;margin:0;padding:0;}
+  .ledger li{
+    display:flex;gap:14px;padding:12px 0;
+    border-top:1px solid var(--line);
+    font-size:.96rem;color:var(--ink-soft);
+  }
+  .ledger li:first-child{border-top:none;}
+  .ledger .m{color:var(--accent);flex-shrink:0;font-size:.9rem;padding-top:1px;}
+
+  footer{padding-top:26px;border-top:1px solid var(--line);}
+  .foot-line{font-size:.74rem;color:var(--muted);margin:0 0 6px;line-height:1.6;}
+  .manifest{color:var(--accent);margin-top:12px;}
+  .copy{font-size:.8rem;color:var(--muted);margin:16px 0 0;}
+
+  .reveal{opacity:0;transform:translateY(12px);}
+  body.ready .reveal{
+    opacity:1;transform:none;
+    transition:opacity .6s ease,transform .6s ease;
+  }
+  body.ready .reveal.d1{transition-delay:.06s;}
+  body.ready .reveal.d2{transition-delay:.12s;}
+  body.ready .reveal.d3{transition-delay:.18s;}
+
+  @media (max-width:860px){
+    .wrap{grid-template-columns:1fr;gap:44px;padding:44px 24px 64px;}
+    .rail{position:static;}
+    .seal{max-width:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;}
+    .card:hover{transform:none;}
+    body.ready .reveal{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="rail">
+    <div class="avatar mono">AT</div>
+    <h1>Abraham Trueba</h1>
+    <p class="tag">Computational biology · drug-target discovery · open science</p>
+    <p class="edu">Chemical biology, UC Berkeley · bioinformatics, Brandeis · incoming MD (MS1), UAG International MD</p>
+    <nav class="links">
+      <a href="https://github.com/crisprking"><span class="k mono">gh</span><span>github.com/crisprking</span></a>
+      <!-- Uncomment and fill in when ready:
+      <a href="https://YOURNAME.substack.com"><span class="k mono">sub</span><span>Substack</span></a>
+      <a href="https://x.com/YOURHANDLE"><span class="k mono">x</span><span>@YOURHANDLE</span></a>
+      -->
+    </nav>
+    <p class="seal mono">reproducible&nbsp;·&nbsp;SHA-locked&nbsp;·&nbsp;nulls published</p>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <p class="kicker mono reveal">// premise</p>
+      <h2 class="display reveal d1">Is the drug target real?</h2>
+      <p class="lede reveal d2">I build open-source computational pipelines that interrogate whether a drug target is actually real — and try as hard to falsify a hypothesis as to confirm it. Every project ships a pre-registered hypothesis, content-addressed (SHA-locked) verdicts so results can't quietly drift, and null results published next to the positive ones. Most of it runs end-to-end on free Kaggle GPUs.</p>
+      <p class="sig mono reveal d3">pre-registered hypotheses&nbsp;·&nbsp;content-addressed verdicts&nbsp;·&nbsp;gaps documented, not smoothed&nbsp;·&nbsp;free compute</p>
+    </section>
+
+    <section>
+      <p class="kicker mono">// selected work</p>
+      <h3 class="sec">Frameworks &amp; methods</h3>
+      <div class="cards">
+        <a class="card" href="https://github.com/crisprking/falsifiable-targets">
+          <div class="card-top">
+            <span class="repo mono">crisprking/falsifiable-targets</span>
+            <span class="chip mono">83% acc · 50% cov</span>
+          </div>
+          <p class="card-body">A content-addressed audit engine for drug-target direction-of-effect (inhibit vs. activate), built on Open Targets colocalization and benchmarked against approved drug–target pairs — with the failure modes it can't yet handle documented rather than hidden. The production layer adds batch auditing, Nextflow + Snakemake DAGs, and a Docker image.</p>
+          <span class="flag mono">known gaps: 3 documented failure modes</span>
+        </a>
+
+        <a class="card" href="https://github.com/crisprking/esm-trust">
+          <div class="card-top">
+            <span class="repo mono">crisprking/esm-trust</span>
+            <span class="chip mono">self-consistency ≠ accuracy</span>
+          </div>
+          <p class="card-body">When can you trust ESM-C's zero-shot variant-effect rankings — and when can't you? A small, reproducible benchmark showing that a model's self-consistency across sizes does <em>not</em> predict its accuracy, plus a calibration tool for deciding when to rely on it.</p>
+        </a>
+
+        <a class="card" href="https://github.com/crisprking/nav17-asymmetry">
+          <div class="card-top">
+            <span class="repo mono">crisprking/nav17-asymmetry</span>
+            <span class="chip mono">Nav1.7 · SCN9A</span>
+          </div>
+          <p class="card-body">Why the best genetically validated pain target keeps failing in the clinic. Makes the case for a <em>genetic–pharmacological asymmetry</em>: lifelong genetic loss of Nav1.7 is cardiovascular-silent, while acute pharmacological block causes on-target autonomic toxicity. Single-cell atlas analysis, a leaky homeostatic-compensation model, and gnomAD / ClinVar / Open Targets genetics, converging on three independent 2024 publications.</p>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker mono">// selected work</p>
+      <h3 class="sec">Target-discovery pipelines</h3>
+      <div class="cards">
+        <a class="card" href="https://github.com/crisprking/t1d-celltype-of-action">
+          <div class="card-top">
+            <span class="repo mono">crisprking/t1d-celltype-of-action</span>
+            <span class="chip mono">21 calls · 145 loci</span>
+          </div>
+          <p class="card-body">Maps type-1-diabetes GWAS loci to the pancreatic cell types they likely act in, using τ-based cell-type specificity in the HPAP scRNA-seq atlas, and cross-validates against autoantibody-positive pre-clinical transcriptional change.</p>
+        </a>
+
+        <a class="card" href="https://github.com/crisprking/madurella-target-discovery">
+          <div class="card-top">
+            <span class="repo mono">crisprking/madurella-target-discovery</span>
+            <span class="chip mono">10,707 → 7</span>
+          </div>
+          <p class="card-body">Runs a standard ChEMBL-driven target pipeline on <em>Madurella mycetomatis</em>, a neglected fungal pathogen nobody had mapped — and catches the pipeline's own artifact: the "top" gene was really 384 duplicate records of HDAC4. Triaged to a hardened shortlist, with the audit that caught the error shipped alongside.</p>
+        </a>
+
+        <a class="card" href="https://github.com/crisprking/cruzain-in-silico-pipeline">
+          <div class="card-top">
+            <span class="repo mono">crisprking/cruzain-in-silico-pipeline</span>
+            <span class="chip mono">8 stages · cruzain</span>
+          </div>
+          <p class="card-body">An eight-stage open drug-discovery pipeline for Chagas disease targeting the <em>T. cruzi</em> protease cruzain: three parallel scoring tracks fused into a consensus, a selectivity counter-screen against three human cathepsins, and ADMET filtering. Runs on a free Kaggle T4.</p>
+        </a>
+
+        <a class="card" href="https://github.com/crisprking/degradomap">
+          <div class="card-top">
+            <span class="repo mono">crisprking/degradomap</span>
+            <span class="chip mono">PROTAC · E3</span>
+          </div>
+          <p class="card-body">An empirical evaluation of which public-data features actually predict PROTAC E3-ligase tractability.</p>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <p class="kicker mono">// also</p>
+      <h3 class="sec">Tools</h3>
+      <p class="tools"><a href="https://github.com/crisprking/ncbi-bioscraper">ncbi-bioscraper</a> (zero-cost PubMed + OpenAlex + open-access full-text mining), <a href="https://github.com/crisprking/target-confidence-card">target-confidence-card</a>, <a href="https://github.com/crisprking/miniprotein_genai">miniprotein_genai</a>, and an <a href="https://github.com/crisprking/MCAT-study-app">MCAT concept-practice app</a> for premeds.</p>
+    </section>
+
+    <section>
+      <p class="kicker mono">// how i work</p>
+      <h3 class="sec">Method</h3>
+      <ul class="ledger">
+        <li><span class="m mono">&#9656;</span><span>Pre-registered, falsifiable hypotheses — fixed <em>before</em> the analysis runs.</span></li>
+        <li><span class="m mono">&#9656;</span><span>Content-addressed, SHA-locked verdicts, so a result can't silently change.</span></li>
+        <li><span class="m mono">&#9656;</span><span>Refusal-first — the pipeline is allowed to say "not enough evidence," and gaps are documented rather than smoothed over.</span></li>
+        <li><span class="m mono">&#9656;</span><span>Null results shipped next to the positive ones.</span></li>
+        <li><span class="m mono">&#9656;</span><span>Reproducible on free compute (Kaggle T4), in self-contained notebooks.</span></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p class="foot-line mono">stack: python · jupyter / kaggle · nextflow + snakemake · docker</p>
+      <p class="foot-line mono">data: gnomad · clinvar · open targets · hpap · cellxgene · chembl · esm-c</p>
+      <p class="foot-line mono manifest">// runs on free hardware — verdicts content-addressed — nulls published</p>
+      <p class="copy">© <span id="yr">2026</span> Abraham Trueba</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  requestAnimationFrame(function(){ document.body.classList.add('ready'); });
+</script>
+</body>
+</html>
