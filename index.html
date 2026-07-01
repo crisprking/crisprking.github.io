@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abraham Trueba — computational biology, drug-target discovery</title>
-<meta name="description" content="Open-source computational pipelines that test whether a drug target is actually real. Pre-registered hypotheses, SHA-locked verdicts, null results published.">
+<meta name="description" content="Open-source computational pipelines that test whether a drug target is actually real. Pre-registered hypotheses, SHA-locked verdicts, null results published. Chemical biologist and bioinformatician; MD in progress.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,6 +35,7 @@
     text-rendering:optimizeLegibility;
   }
   a{color:inherit;}
+  em{font-style:italic;}
   .mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;}
 
   .wrap{
@@ -47,24 +48,23 @@
   }
 
   .rail{position:sticky;top:56px;align-self:start;}
-  .avatar{
-    width:52px;height:52px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    background:var(--ink);color:var(--paper);
-    font-size:15px;font-weight:500;letter-spacing:.06em;
-    margin-bottom:22px;
+  .photo{
+    width:112px;height:112px;border-radius:50%;
+    object-fit:cover;display:block;margin-bottom:22px;
+    box-shadow:0 0 0 1px var(--line), 0 0 0 5px var(--accent-soft);
   }
   .rail h1{
     font-family:"Space Grotesk",sans-serif;
     font-weight:700;font-size:1.5rem;line-height:1.15;
-    margin:0 0 10px;letter-spacing:-.01em;
+    margin:0 0 8px;letter-spacing:-.01em;
   }
-  .tag{margin:0 0 16px;color:var(--ink-soft);font-size:.94rem;}
-  .edu{margin:0 0 26px;color:var(--muted);font-size:.82rem;line-height:1.5;}
-  .links{display:flex;flex-direction:column;gap:11px;margin-bottom:28px;}
+  .tag{margin:0 0 4px;color:var(--ink-soft);font-size:.94rem;}
+  .role{margin:0 0 16px;color:var(--muted);font-size:.86rem;}
+  .edu{margin:0 0 24px;color:var(--muted);font-size:.8rem;line-height:1.55;}
+  .links{display:flex;flex-direction:column;gap:11px;margin-bottom:26px;}
   .links a{
     display:flex;align-items:baseline;gap:10px;
-    text-decoration:none;font-size:.9rem;color:var(--ink-soft);
+    text-decoration:none;font-size:.88rem;color:var(--ink-soft);
     width:fit-content;transition:color .15s ease;
   }
   .links a:hover{color:var(--accent);}
@@ -80,10 +80,7 @@
   }
 
   main{min-width:0;}
-  .kicker{
-    font-size:.74rem;color:var(--accent);letter-spacing:.04em;
-    margin:0 0 12px;
-  }
+  .kicker{font-size:.74rem;color:var(--accent);letter-spacing:.04em;margin:0 0 12px;}
   section{margin-bottom:60px;}
   section:last-of-type{margin-bottom:48px;}
 
@@ -100,65 +97,78 @@
 
   .sec{
     font-family:"Space Grotesk",sans-serif;font-weight:600;
-    font-size:1.16rem;margin:0 0 22px;letter-spacing:-.01em;
+    font-size:1.16rem;margin:0 0 8px;letter-spacing:-.01em;
   }
+  .group-note{margin:0 0 20px;color:var(--muted);font-size:.9rem;max-width:58ch;}
+  .subsec{
+    font-family:"Space Grotesk",sans-serif;font-weight:600;
+    font-size:1rem;margin:36px 0 16px;letter-spacing:-.01em;color:var(--ink);
+  }
+
+  .now{
+    background:var(--card);border:1px solid var(--card-line);
+    border-left:3px solid var(--accent);border-radius:10px;
+    padding:8px 22px;
+  }
+  .now-row{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--line);}
+  .now-row:first-child{border-top:none;}
+  .dot{position:relative;width:9px;height:9px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:7px;}
+  .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);opacity:.4;}
+  .now-h{margin:0 0 5px;font-weight:600;font-size:.98rem;color:var(--ink);}
+  .now-b{margin:0;font-size:.92rem;color:var(--ink-soft);}
+  .now-b a{color:var(--accent);text-decoration:none;}
+  .now-b a:hover{text-decoration:underline;}
 
   .cards{display:flex;flex-direction:column;gap:14px;}
   .card{
-    display:block;text-decoration:none;
-    background:var(--card);
+    display:block;text-decoration:none;background:var(--card);
     border:1px solid var(--card-line);border-radius:10px;
-    padding:20px 22px;
-    border-left:3px solid var(--card-line);
+    padding:20px 22px;border-left:3px solid var(--card-line);
     transition:border-color .16s ease,transform .16s ease,box-shadow .16s ease;
   }
   .card:hover{
-    border-left-color:var(--accent);
-    transform:translateY(-2px);
+    border-left-color:var(--accent);transform:translateY(-2px);
     box-shadow:0 10px 26px -18px rgba(13,114,104,.5);
   }
   .card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-  .card-top{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:14px;margin-bottom:10px;flex-wrap:wrap;
-  }
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px;flex-wrap:wrap;}
   .repo{font-size:.82rem;color:var(--ink);font-weight:500;}
-  .chip{
-    font-size:.72rem;color:var(--accent);
-    background:var(--accent-soft);
-    padding:3px 9px;border-radius:20px;white-space:nowrap;
-  }
+  .chip{font-size:.72rem;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:20px;white-space:nowrap;}
   .card-body{margin:0;font-size:.95rem;color:var(--ink-soft);}
-  .flag{
-    display:inline-block;margin-top:12px;
-    font-size:.72rem;color:var(--flag);
-    background:var(--flag-soft);
-    padding:3px 9px;border-radius:20px;
-  }
+  .flag{display:inline-block;margin-top:12px;font-size:.72rem;color:var(--flag);background:var(--flag-soft);padding:3px 9px;border-radius:20px;}
 
   .tools{font-size:.95rem;color:var(--ink-soft);margin:0;max-width:60ch;}
   .tools a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-soft);}
   .tools a:hover{border-bottom-color:var(--accent);}
 
+  .edu-list{display:flex;flex-direction:column;gap:2px;}
+  .edu-item{padding:14px 0;border-top:1px solid var(--line);}
+  .edu-item:first-child{border-top:none;}
+  .edu-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline;}
+  .deg{font-weight:600;font-size:1rem;color:var(--ink);}
+  .edu-meta{font-size:.78rem;color:var(--muted);white-space:nowrap;}
+  .edu-sub{margin:6px 0 0;font-size:.92rem;color:var(--ink-soft);}
+
+  .tl{list-style:none;margin:0;padding:0;}
+  .tl li{display:flex;gap:18px;padding:16px 0;border-top:1px solid var(--line);}
+  .tl li:first-child{border-top:none;}
+  .yr{font-size:.8rem;color:var(--accent);min-width:64px;flex-shrink:0;padding-top:2px;}
+  .tl-h{margin:0 0 5px;font-weight:600;font-size:.97rem;color:var(--ink);}
+  .tl-b{margin:0;font-size:.92rem;color:var(--ink-soft);}
+
   .ledger{list-style:none;margin:0;padding:0;}
-  .ledger li{
-    display:flex;gap:14px;padding:12px 0;
-    border-top:1px solid var(--line);
-    font-size:.96rem;color:var(--ink-soft);
-  }
+  .ledger li{display:flex;gap:14px;padding:12px 0;border-top:1px solid var(--line);font-size:.96rem;color:var(--ink-soft);}
   .ledger li:first-child{border-top:none;}
   .ledger .m{color:var(--accent);flex-shrink:0;font-size:.9rem;padding-top:1px;}
 
   footer{padding-top:26px;border-top:1px solid var(--line);}
   .foot-line{font-size:.74rem;color:var(--muted);margin:0 0 6px;line-height:1.6;}
+  .foot-line a{color:var(--accent);text-decoration:none;}
   .manifest{color:var(--accent);margin-top:12px;}
   .copy{font-size:.8rem;color:var(--muted);margin:16px 0 0;}
 
   .reveal{opacity:0;transform:translateY(12px);}
-  body.ready .reveal{
-    opacity:1;transform:none;
-    transition:opacity .6s ease,transform .6s ease;
-  }
+  body.ready .reveal{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease;}
   body.ready .reveal.d1{transition-delay:.06s;}
   body.ready .reveal.d2{transition-delay:.12s;}
   body.ready .reveal.d3{transition-delay:.18s;}
@@ -166,26 +176,33 @@
   @media (max-width:860px){
     .wrap{grid-template-columns:1fr;gap:44px;padding:44px 24px 64px;}
     .rail{position:static;}
-    .seal{max-width:none;}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
     .reveal{opacity:1;transform:none;}
     .card:hover{transform:none;}
     body.ready .reveal{transition:none;}
+    .dot::after{display:none;}
   }
+  @media (prefers-reduced-motion:no-preference){
+    .dot::after{animation:ping 2.4s ease-out infinite;}
+  }
+  @keyframes ping{0%{transform:scale(.7);opacity:.5}70%{transform:scale(1.4);opacity:0}100%{opacity:0}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <aside class="rail">
-    <div class="avatar mono">AT</div>
+    <img class="photo" src="pic.jpg" alt="Abraham Trueba" width="112" height="112">
     <h1>Abraham Trueba</h1>
     <p class="tag">Computational biology · drug-target discovery · open science</p>
-    <p class="edu">Chemical biology, UC Berkeley · bioinformatics, Brandeis · incoming MD (MS1), UAG International MD</p>
+    <p class="role">Chemical biologist &amp; bioinformatician · MD in progress</p>
+    <p class="edu">UC Berkeley, Chem Bio · Brandeis, MS Bioinformatics · UAG International MD, MS1</p>
     <nav class="links">
       <a href="https://github.com/crisprking"><span class="k mono">gh</span><span>github.com/crisprking</span></a>
+      <a href="mailto:abrahamtrueba@berkeley.edu"><span class="k mono">@</span><span>abrahamtrueba@berkeley.edu</span></a>
       <!-- Uncomment and fill in when ready:
+      <a href="https://www.linkedin.com/in/YOURHANDLE"><span class="k mono">in</span><span>LinkedIn</span></a>
       <a href="https://YOURNAME.substack.com"><span class="k mono">sub</span><span>Substack</span></a>
       <a href="https://x.com/YOURHANDLE"><span class="k mono">x</span><span>@YOURHANDLE</span></a>
       -->
@@ -202,8 +219,38 @@
     </section>
 
     <section>
+      <p class="kicker mono">// now</p>
+      <h3 class="sec">What I'm working on</h3>
+      <p class="group-note">Current, active lines of work.</p>
+      <div class="now">
+        <div class="now-row">
+          <span class="dot"></span>
+          <div>
+            <p class="now-h">Nav1.7 (SCN9A) — the genetic–pharmacological asymmetry of a "perfect" pain target</p>
+            <p class="now-b">A full analysis of why lifelong genetic loss of Nav1.7 abolishes pain at no cardiovascular cost, yet acute pharmacological block keeps failing in the clinic — biophysics, expression, and human-genetics arms converging on a two-sided constraint. Shipping as a reproducible pipeline and write-up: <a href="https://github.com/crisprking/nav17-asymmetry">crisprking/nav17-asymmetry</a>.</p>
+          </div>
+        </div>
+        <div class="now-row">
+          <span class="dot"></span>
+          <div>
+            <p class="now-h">Medical school — MS1, UAG International MD</p>
+            <p class="now-b">Training clinically while keeping an active open-source computational research line.</p>
+          </div>
+        </div>
+        <div class="now-row">
+          <span class="dot"></span>
+          <div>
+            <p class="now-h">Open drug-target auditing</p>
+            <p class="now-b">Extending <a href="https://github.com/crisprking/falsifiable-targets">falsifiable-targets</a> — pre-registered, SHA-locked verdicts on whether a target's genetics actually support the proposed direction of effect.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <p class="kicker mono">// selected work</p>
       <h3 class="sec">Frameworks &amp; methods</h3>
+      <p class="group-note">Reusable tools for deciding whether a target — or a model's claim about it — can be trusted.</p>
       <div class="cards">
         <a class="card" href="https://github.com/crisprking/falsifiable-targets">
           <div class="card-top">
@@ -230,11 +277,9 @@
           <p class="card-body">Why the best genetically validated pain target keeps failing in the clinic. Makes the case for a <em>genetic–pharmacological asymmetry</em>: lifelong genetic loss of Nav1.7 is cardiovascular-silent, while acute pharmacological block causes on-target autonomic toxicity. Single-cell atlas analysis, a leaky homeostatic-compensation model, and gnomAD / ClinVar / Open Targets genetics, converging on three independent 2024 publications.</p>
         </a>
       </div>
-    </section>
 
-    <section>
-      <p class="kicker mono">// selected work</p>
-      <h3 class="sec">Target-discovery pipelines</h3>
+      <h3 class="sec" style="margin-top:44px;">Target-discovery pipelines</h3>
+      <p class="group-note">Public data to a defensible shortlist, end-to-end, on free compute.</p>
       <div class="cards">
         <a class="card" href="https://github.com/crisprking/t1d-celltype-of-action">
           <div class="card-top">
@@ -268,12 +313,84 @@
           <p class="card-body">An empirical evaluation of which public-data features actually predict PROTAC E3-ligase tractability.</p>
         </a>
       </div>
+
+      <h3 class="sec" style="margin-top:44px;">Tools</h3>
+      <p class="tools"><a href="https://github.com/crisprking/ncbi-bioscraper">ncbi-bioscraper</a> (zero-cost PubMed + OpenAlex + open-access full-text mining), <a href="https://github.com/crisprking/target-confidence-card">target-confidence-card</a>, <a href="https://github.com/crisprking/miniprotein_genai">miniprotein_genai</a>, and an <a href="https://github.com/crisprking/MCAT-study-app">MCAT concept-practice app</a> for premeds.</p>
     </section>
 
     <section>
-      <p class="kicker mono">// also</p>
-      <h3 class="sec">Tools</h3>
-      <p class="tools"><a href="https://github.com/crisprking/ncbi-bioscraper">ncbi-bioscraper</a> (zero-cost PubMed + OpenAlex + open-access full-text mining), <a href="https://github.com/crisprking/target-confidence-card">target-confidence-card</a>, <a href="https://github.com/crisprking/miniprotein_genai">miniprotein_genai</a>, and an <a href="https://github.com/crisprking/MCAT-study-app">MCAT concept-practice app</a> for premeds.</p>
+      <p class="kicker mono">// background</p>
+      <h3 class="sec">Education</h3>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-top"><span class="deg">MD — in progress</span><span class="edu-meta mono">UAG International MD · MS1</span></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-top"><span class="deg">MS, Bioinformatics</span><span class="edu-meta mono">Brandeis · 2025 · GPA 3.85</span></div>
+          <p class="edu-sub">Biomathematics, bioinformatics, and computational biology.</p>
+        </div>
+        <div class="edu-item">
+          <div class="edu-top"><span class="deg">BS, Chemical Biology</span><span class="edu-meta mono">UC Berkeley · 2020 · GPA 3.67</span></div>
+          <p class="edu-sub">Genetics, genomics &amp; cell biology; immunochemistry and cell culture. Thesis: <em>Refining the epigenome through CRISPR-mediated techniques to establish a programmable system for transcriptional memory.</em></p>
+        </div>
+      </div>
+
+      <h4 class="subsec">Research &amp; lab</h4>
+      <ul class="tl">
+        <li>
+          <span class="yr mono">2017–</span>
+          <div>
+            <p class="tl-h">University research — microbiology, cell &amp; chemical biology</p>
+            <p class="tl-b">Developed biolayer interferometry (BLI-ISA) for rapid, real-time SARS-CoV-2 antibody quantification — a faster optical alternative to ELISA, evaluated as a COVID-19 diagnostic platform on clinical specimens.</p>
+          </div>
+        </li>
+        <li>
+          <span class="yr mono">2021–22</span>
+          <div>
+            <p class="tl-h">Medical Technician — Discover Labs</p>
+            <p class="tl-b">Real-time PCR panels and automated RNA extraction under CLIA/HIPAA, with antimicrobial-treatment guidance and QC-workflow improvements.</p>
+          </div>
+        </li>
+        <li>
+          <span class="yr mono">2018</span>
+          <div>
+            <p class="tl-h">Research Assistant — Tecnológico de Monterrey</p>
+            <p class="tl-b">Microalgae bioprocessing: spirulina cultivation, phycocyanin and DHA microencapsulation (Y-flow apparatus), and a microalgae-based UV-protective cream.</p>
+          </div>
+        </li>
+      </ul>
+
+      <h4 class="subsec">Industry &amp; commercial</h4>
+      <ul class="tl">
+        <li>
+          <span class="yr mono">2024–</span>
+          <div>
+            <p class="tl-h">Inside Sales Specialist — EditCo Bio (CRISPR)</p>
+            <p class="tl-b">$0.5–1.5M in CRISPR revenue closed in 16 months as sole inside rep across 30 states — a bench-trained seller who solves protocol problems. Authored the email playbook adopted team-wide that doubled reply rates.</p>
+          </div>
+        </li>
+        <li>
+          <span class="yr mono">2022–23</span>
+          <div>
+            <p class="tl-h">Sales Account Manager — GenScript</p>
+            <p class="tl-b">439% YoY growth in gene-editing services; top-5 sales manager; managed a $5M multi-state portfolio across pharma, biotech, and academia.</p>
+          </div>
+        </li>
+        <li>
+          <span class="yr mono">2022</span>
+          <div>
+            <p class="tl-h">QC Consultant — Biotechnique / Moderna &amp; Varian Medical</p>
+            <p class="tl-b">IQ/OQ qualification, sterilizer SOPs, and cleanroom QC for Moderna equipment under FDA and SAP guidelines.</p>
+          </div>
+        </li>
+        <li>
+          <span class="yr mono">2020–22</span>
+          <div>
+            <p class="tl-h">Founder &amp; CEO — Creative Science</p>
+            <p class="tl-b">Cross-border lab- and medical-equipment resale (US / Mexico). Built, ran, and exited.</p>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <section>
@@ -291,6 +408,7 @@
     <footer>
       <p class="foot-line mono">stack: python · jupyter / kaggle · nextflow + snakemake · docker</p>
       <p class="foot-line mono">data: gnomad · clinvar · open targets · hpap · cellxgene · chembl · esm-c</p>
+      <p class="foot-line mono">contact: <a href="mailto:abrahamtrueba@berkeley.edu">abrahamtrueba@berkeley.edu</a> · <a href="https://github.com/crisprking">github.com/crisprking</a></p>
       <p class="foot-line mono manifest">// runs on free hardware — verdicts content-addressed — nulls published</p>
       <p class="copy">© <span id="yr">2026</span> Abraham Trueba</p>
     </footer>
