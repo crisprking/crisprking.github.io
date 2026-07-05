@@ -265,8 +265,8 @@
 
     <section>
       <p class="kicker mono">// selected work</p>
-      <h3 class="sec">Reliability &amp; audit frameworks</h3>
-      <p class="group-note">Reusable tools for deciding whether a target — or a model's or metric's claim about it — can actually be trusted.</p>
+      <h3 class="sec">Frameworks &amp; methods</h3>
+      <p class="group-note">Reusable tools for deciding whether a target — or a model's claim about it — can be trusted.</p>
       <div class="cards">
         <a class="card" href="https://github.com/crisprking/falsifiable-targets">
           <div class="card-top">
@@ -277,23 +277,6 @@
           <span class="flag mono">known gaps: 3 documented failure modes</span>
         </a>
 
-        <a class="card" href="https://github.com/crisprking/loeuf-safety-audit">
-          <div class="card-top">
-            <span class="repo mono">crisprking/loeuf-safety-audit</span>
-            <span class="chip mono">AUROC 0.70 vs 0.60</span>
-          </div>
-          <p class="card-body">Population-genetic constraint (gnomAD's LOEUF) is widely read as <em>"is this gene safe to inhibit?"</em> — a job it was never built for. On 384 drug targets it separates genetically knockout-tolerant genes well (AUROC 0.70), but barely predicts clinical safety liability (AUROC 0.60, a hair above chance). Constraint and cell-essentiality turn out near-orthogonal (ρ = 0.16), and the discordant genes — constrained yet cell-dispensable — carry safety liabilities at ~2× the rate. The thing it's used for is the thing it can't do.</p>
-          <span class="flag mono">QC-passed: 11/14 load-bearing claims certified</span>
-        </a>
-
-        <a class="card" href="https://github.com/crisprking/target-confidence-card">
-          <div class="card-top">
-            <span class="repo mono">crisprking/target-confidence-card</span>
-            <span class="chip mono">TRUST / CAUTION / REFUSE</span>
-          </div>
-          <p class="card-body">A refusal-first reliability prior for missense variant-effect predictors. Before you trust <em>any</em> predictor (AlphaMissense, ESM, EVE, REVEL) on a gene, it asks whether that gene even has enough two-sided ClinVar ground truth to benchmark one at all — and it never rescores a predictor, so the verdict doesn't move when you swap models. On real ClinVar, 18,514 genes collapse to just two with a measurably tight AUROC. Every verdict is SHA-256 content-addressed, so a cited call is reproducible.</p>
-        </a>
-
         <a class="card" href="https://github.com/crisprking/esm-trust">
           <div class="card-top">
             <span class="repo mono">crisprking/esm-trust</span>
@@ -302,11 +285,6 @@
           <p class="card-body">When can you trust ESM-C's zero-shot variant-effect rankings — and when can't you? A small, reproducible benchmark showing that a model's self-consistency across sizes does <em>not</em> predict its accuracy, plus a calibration tool for deciding when to rely on it.</p>
         </a>
 
-      </div>
-
-      <h3 class="sec" style="margin-top:44px;">Target-discovery pipelines</h3>
-      <p class="group-note">Public data to a defensible shortlist, end-to-end, on free compute.</p>
-      <div class="cards">
         <a class="card" href="https://github.com/crisprking/nav17-asymmetry">
           <div class="card-top">
             <span class="repo mono">crisprking/nav17-asymmetry</span>
@@ -314,15 +292,11 @@
           </div>
           <p class="card-body">Why the best genetically validated pain target keeps failing in the clinic. Makes the case for a <em>genetic–pharmacological asymmetry</em>: lifelong genetic loss of Nav1.7 is cardiovascular-silent, while acute pharmacological block causes on-target autonomic toxicity. Single-cell atlas analysis, a leaky homeostatic-compensation model, and gnomAD / ClinVar / Open Targets genetics, converging on three independent 2024 publications.</p>
         </a>
+      </div>
 
-        <a class="card" href="https://github.com/crisprking/enpp1">
-          <div class="card-top">
-            <span class="repo mono">crisprking/enpp1</span>
-            <span class="chip mono">ENPP1 · vs ENPP2/3</span>
-          </div>
-          <p class="card-body">A structure-based counter-screen asking whether an ENPP1 lead truly prefers ENPP1 over its near-identical paralogs ENPP2 and ENPP3 — the selectivity axis this cGAS–STING immuno-oncology target keeps failing on. Across 42 docking replicates with bootstrap CIs it demotes the prior consensus-docking winner — a hydroxamate that binds ENPP3 <em>better</em> than ENPP1 because it chelates the conserved catalytic zinc — and directionally promotes two developable sulfamides. Ships its own negative controls (a cognate redock that misses strict RMSD, an actives/decoys enrichment AUC of 0.44) and reports the call as a prioritization hypothesis for assay, not a selectivity ratio.</p>
-        </a>
-
+      <h3 class="sec" style="margin-top:44px;">Target-discovery pipelines</h3>
+      <p class="group-note">Public data to a defensible shortlist, end-to-end, on free compute.</p>
+      <div class="cards">
         <a class="card" href="https://github.com/crisprking/t1d-celltype-of-action">
           <div class="card-top">
             <span class="repo mono">crisprking/t1d-celltype-of-action</span>
@@ -347,6 +321,14 @@
           <p class="card-body">An eight-stage open drug-discovery pipeline for Chagas disease targeting the <em>T. cruzi</em> protease cruzain: three parallel scoring tracks fused into a consensus, a selectivity counter-screen against three human cathepsins, and ADMET filtering. Runs on a free Kaggle T4.</p>
         </a>
 
+        <a class="card" href="https://github.com/crisprking/enpp1">
+          <div class="card-top">
+            <span class="repo mono">crisprking/enpp1</span>
+            <span class="chip mono">selectivity counter-screen · ENPP1</span>
+          </div>
+          <p class="card-body">A structure-based paralog selectivity counter-screen for the immuno-oncology target ENPP1: dock candidate inhibitors into ENPP1 and its two close cousins <em>ENPP2 (autotaxin)</em> and <em>ENPP3</em> with one identical zinc-centered box, then rank by cross-paralog margin rather than raw affinity. The top affinity binder reversed to an off-target liability; native controls, bootstrap CIs, and two honest negative benchmarks ship alongside. Runs on a free Kaggle T4.</p>
+        </a>
+
         <a class="card" href="https://github.com/crisprking/degradomap">
           <div class="card-top">
             <span class="repo mono">crisprking/degradomap</span>
@@ -357,7 +339,7 @@
       </div>
 
       <h3 class="sec" style="margin-top:44px;">Tools</h3>
-      <p class="tools"><a href="https://github.com/crisprking/ncbi-bioscraper">ncbi-bioscraper</a> (zero-cost PubMed + OpenAlex + open-access full-text mining), <a href="https://github.com/crisprking/miniprotein_genai">miniprotein_genai</a> (generative protein design in four Colab notebooks), and an <a href="https://github.com/crisprking/MCAT-study-app">MCAT concept-practice app</a> for premeds.</p>
+      <p class="tools"><a href="https://github.com/crisprking/ncbi-bioscraper">ncbi-bioscraper</a> (zero-cost PubMed + OpenAlex + open-access full-text mining), <a href="https://github.com/crisprking/target-confidence-card">target-confidence-card</a>, <a href="https://github.com/crisprking/miniprotein_genai">miniprotein_genai</a>, and an <a href="https://github.com/crisprking/MCAT-study-app">MCAT concept-practice app</a> for premeds.</p>
     </section>
 
     <section>
